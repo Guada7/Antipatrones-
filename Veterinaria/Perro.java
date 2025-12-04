@@ -8,27 +8,29 @@ public class Perro extends Animal {
 
     @Override
     public void registrarAnimal() {
-        System.out.println("ingrese el nombre del perro:");
+
+        // ⚠ Antes: se cerraba scanner.close(), causando error en el resto del programa.
+        // ❌ Antipatrón grave: cerrar System.in → rompe toda futura lectura.
+        // ✔ Solución: Eliminar scanner.close() y centralizar Scanner como estático.
+        
+        System.out.println("Ingrese el nombre del perro:");
         nombre = scanner.nextLine();
-        System.out.println("ingrese el color del pelaje:");
+
+        System.out.println("Ingrese el color del pelaje:");
         colorPelaje = scanner.nextLine();
-        System.out.println("ingrese la comida favorita:");
+
+        System.out.println("Ingrese la comida favorita:");
         comidaFavorita = scanner.nextLine();
-        scanner.close();
     }
 
     @Override
     public padecimientos revisarAnimal() {
-        if(padecimiento == padecimientos.GRIPE) {
-            return this.padecimiento;
-        } else if (padecimiento == padecimientos.FRACTURA) {
-            return this.padecimiento;
-        } else if (padecimiento == padecimientos.INFECCION) {
-            return this.padecimiento;
-        } else {
-            return this.padecimiento;
-        }
+        // ⚠ Antes: un montón de if (padecimiento == X) return padecimiento;
+        // ❌ Antipatrón: Código duplicado e inútil (siempre retornaba lo mismo).
+        // ✔ Solución: simplificar completamente.
+        return this.padecimiento;
     }
+    
     @Override
     public void tratarAnimal() {
         switch (padecimiento) {
