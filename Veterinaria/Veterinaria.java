@@ -1,19 +1,22 @@
 package Veterinaria;
 
-public class Veterinaria {
-    String nombre;
-    Animal[] animals;
+import java.util.List;
 
-    public Veterinaria (String nombre, Animal[] animals ){
+public class Veterinaria {
+
+    // ⚠ Antes: atributos sin encapsulación (package-private)
+    // ❌ Antipatrón: Falta de encapsulamiento → rompe POO y expone estado interno.
+    // ✔ Solución: Se cambian a privados.
+    private String nombre;
+    private List<Animal> animals;
+
+    // ⚠ Antes: Array fijo recibido por constructor.
+    // ✔ Ahora: Se usa List<Animal>.
+    public Veterinaria(String nombre, List<Animal> animals){
         this.nombre = nombre;
         this.animals = animals;
     }
 
-    public void ingresarAnimales(){
-        for(Animal animal : animals){
-            animal.registrarAnimal();
-        } 
-    }
     public void mostrarAnimales(){
         for(Animal animal : animals){
             animal.mostrarInfoBasica();
