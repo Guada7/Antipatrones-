@@ -3,15 +3,21 @@ import java.util.Random;
 import java.util.Scanner;
 
 public abstract class Animal {
-    
-public enum padecimientos {
+
+    // ⚠ Antes: enum padecimientos iniciaba con minúscula.
+    // ❌ Antipatrón: Convención incorrecta de nombres.
+    // ✔ Solución: Se renombra a Padecimiento (UpperCamelCase).
+public enum Padecimientos {
     GRIPE, FRACTURA, INFECCION, OTRO
 }
 
     protected String nombre, colorPelaje, comidaFavorita;
     protected padecimientos padecimiento;
-    Scanner scanner = new Scanner(System.in);
-
+    // ⚠ Antes: Cada Animal tenía su propio Scanner, y Perro lo cerraba.
+    // ❌ Antipatrón: Cerrar System.in inutiliza todas las lecturas del programa.
+    // ✔ Solución: Crear un único Scanner estático compartido y jamás cerrarlo.
+    protected static final Scanner scanner = new Scanner(System.in);
+    
     public abstract void registrarAnimal();
     public abstract padecimientos revisarAnimal();
     public abstract void tratarAnimal();
